@@ -1,0 +1,63 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  annotations:
+    commit.image.appsody.dev/date: Mon Nov 2 18:33:20 2020 +0900
+    commit.image.appsody.dev/message: app.js update
+    commit.stack.appsody.dev/contextDir: /incubator/nodejs
+    commit.stack.appsody.dev/date: Wed Jun 10 14:59:16 2020 +0100
+    commit.stack.appsody.dev/message: 'meta: replace Sam with Gireesh as the maintainer
+      for node stacks (#830)'
+    image.opencontainers.org/created: "2020-11-03T09:48:58+09:00"
+    image.opencontainers.org/documentation: https://github.com/kkphil83/my-nodejs-stack-test
+    image.opencontainers.org/revision: a68506e9c9adf27a95fda65d3e144049c8efffe6
+    image.opencontainers.org/source: https://github.com/kkphil83/my-nodejs-stack-test/tree/master
+    image.opencontainers.org/url: https://github.com/kkphil83/my-nodejs-stack-test
+    stack.appsody.dev/authors: kangphil_ko <kkphil83>
+    stack.appsody.dev/configured: docker.io/kkphil83/my-nodejs-express-stack:1.0.0
+    stack.appsody.dev/created: "2020-11-02T17:25:50+09:00"
+    stack.appsody.dev/description: Express web framework for Node.js
+    stack.appsody.dev/digest: sha256:5b27d81387e44ab76bfd6a9a240f28377b377e73637d40891b417c26a8befea4
+    stack.appsody.dev/documentation: https://github.com/appsody/stacks/tree/master/incubator/nodejs/README.md
+    stack.appsody.dev/licenses: Apache-2.0
+    stack.appsody.dev/revision: e33111183a1cd18bd96d1974902f4d1003d2bb27
+    stack.appsody.dev/source: https://github.com/appsody/stacks/tree/master/incubator/nodejs/image
+    stack.appsody.dev/tag: docker.io/kkphil83/my-nodejs-express-stack:1.0.0
+    stack.appsody.dev/title: My Node.js Express
+    stack.appsody.dev/url: https://github.com/appsody/stacks/tree/master/incubator/nodejs
+  creationTimestamp: null
+  labels:
+    image.opencontainers.org/title: my-nodejs
+    stack.appsody.dev/id: my-nodejs-express-stack
+    stack.appsody.dev/version: 1.0.0
+  name: my-nodejs
+  namespace: appsody1
+spec:
+  applicationImage: dev.local/my-nodejs
+  createKnativeService: false
+  expose: true
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /live
+      port: 3000
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  monitoring:
+    labels:
+      k8s-app: my-nodejs
+  readinessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /ready
+      port: 3000
+    initialDelaySeconds: 5
+    periodSeconds: 2
+    timeoutSeconds: 1
+  service:
+    annotations:
+      prometheus.io/scrape: "true"
+    port: 3000
+    type: NodePort
+  stack: my-nodejs-express-stack
+  version: 1.0.0
